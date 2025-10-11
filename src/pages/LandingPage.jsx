@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import bannerLayerOne from '../assets/images/banner-parallax-1.png';
 import bannerLayerTwo from '../assets/images/banner-parallax-2.png';
 import bannerLayerThree from '../assets/images/banner-parallax-3.png';
@@ -190,7 +190,74 @@ const AboutSection = () => {
     [images]
   );
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [previousSlide, setPreviousSlide] = useState(null);
+  const [isTextFading, setIsTextFading] = useState(false);
+  const [isImageFading, setIsImageFading] = useState(false);
+  const imageChangeTimeoutRef = useRef(null);
+  const imageRevealTimeoutRef = useRef(null);
+  const previousSlideCleanupTimeoutRef = useRef(null);
+  const textFadeTimeoutRef = useRef(null);
+  const currentIndexRef = useRef(0);
   const hasImages = slides.length > 0;
+
+  const clearTransitionTimers = useCallback(() => {
+    if (imageChangeTimeoutRef.current) {
+      window.clearTimeout(imageChangeTimeoutRef.current);
+      imageChangeTimeoutRef.current = null;
+    }
+    if (imageRevealTimeoutRef.current) {
+      window.clearTimeout(imageRevealTimeoutRef.current);
+      imageRevealTimeoutRef.current = null;
+    }
+    if (previousSlideCleanupTimeoutRef.current) {
+      window.clearTimeout(previousSlideCleanupTimeoutRef.current);
+      previousSlideCleanupTimeoutRef.current = null;
+    }
+    if (textFadeTimeoutRef.current) {
+      window.clearTimeout(textFadeTimeoutRef.current);
+      textFadeTimeoutRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => () => clearTransitionTimers(), [clearTransitionTimers]);
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+
+  const transitionToIndex = useCallback(
+    (getNextIndex) => {
+      if (!hasImages) {
+        return;
+      }
+
+      clearTransitionTimers();
+      const activeIndex = currentIndexRef.current;
+      setPreviousSlide(slides[activeIndex] ?? null);
+      setIsTextFading(true);
+      setIsImageFading(true);
+
+      imageChangeTimeoutRef.current = window.setTimeout(() => {
+        setCurrentIndex((index) => {
+          const nextIndex = getNextIndex(index);
+          const normalized = ((nextIndex % slides.length) + slides.length) % slides.length;
+          return normalized;
+        });
+
+        imageRevealTimeoutRef.current = window.setTimeout(() => {
+          setIsImageFading(false);
+        }, 220);
+
+        previousSlideCleanupTimeoutRef.current = window.setTimeout(() => {
+          setPreviousSlide(null);
+        }, 600);
+      }, 20);
+
+      textFadeTimeoutRef.current = window.setTimeout(() => {
+        setIsTextFading(false);
+      }, 420);
+    },
+    [clearTransitionTimers, hasImages, slides]
+  );
 
   useEffect(() => {
     if (!hasImages || slides.length === 1) {
@@ -198,28 +265,20 @@ const AboutSection = () => {
     }
 
     const intervalId = window.setInterval(() => {
-      setCurrentIndex((index) => (index + 1) % slides.length);
+      transitionToIndex((index) => index + 1);
     }, 5000);
 
     return () => {
       window.clearInterval(intervalId);
     };
-  }, [hasImages, slides.length]);
+  }, [hasImages, slides.length, transitionToIndex]);
 
   const goToPrevious = () => {
-    if (!hasImages) {
-      return;
-    }
-
-    setCurrentIndex((index) => (index - 1 + slides.length) % slides.length);
+    transitionToIndex((index) => index - 1);
   };
 
   const goToNext = () => {
-    if (!hasImages) {
-      return;
-    }
-
-    setCurrentIndex((index) => (index + 1) % slides.length);
+    transitionToIndex((index) => index + 1);
   };
   const currentSlide = slides[currentIndex];
 
@@ -244,18 +303,33 @@ const AboutSection = () => {
               </p>
             </div>
           </div>
-          <div className="relative h-96 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="relative h-96 rounded-3xl shadow-2xl overflow-hidden bg-neutral-950">
             {hasImages ? (
               <>
+                {previousSlide && (
+                  <img
+                    src={previousSlide.imageSrc}
+                    alt="Previous view at La REZ"
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-600 ease-in-out ${
+                      isImageFading ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  />
+                )}
                 <img
                   src={currentSlide.imageSrc}
                   alt="Life at La REZ"
-                  className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-600 ease-in-out ${
+                    isImageFading ? 'opacity-0' : 'opacity-100'
+                  }`}
                   key={currentSlide.imageSrc}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
                 <div className="absolute inset-0 flex flex-col justify-between p-6">
-                  <div className="flex flex-col gap-3 text-left">
+                  <div
+                    className={`flex flex-col gap-3 text-left transition-all duration-300 ease-in-out ${
+                      isTextFading ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'
+                    }`}
+                  >
                     <span className="px-3 py-1 rounded-full bg-white/15 text-white/90 text-xs uppercase tracking-wide self-start">
                       Life at La REZ
                     </span>
