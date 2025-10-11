@@ -6,6 +6,25 @@ import singleRoomImage from '../assets/images/single-room.jpg';
 import doubleRoomImage from '../assets/images/double-room.jpg';
 import sharedRoomImage from '../assets/images/shared-room.jpg';
 
+const aboutSlideContent = [
+  {
+    title: 'Shared Moments',
+    description: 'Catch up with residents in the lounge or swap stories over dinner in our communal kitchen.'
+  },
+  {
+    title: 'Study Together',
+    description: 'Collaborate on projects or prepare for exams in our bright, cozy study corners.'
+  },
+  {
+    title: 'Explore Paris',
+    description: 'Use La REZ as your base to discover the city—great connections put Paris at your doorstep.'
+  },
+  {
+    title: 'Cultural Exchange',
+    description: 'Meet people from around the world and experience new traditions without leaving home.'
+  }
+];
+
 const roomOptions = [
   {
     key: 'single',
@@ -159,29 +178,40 @@ const LandingHero = () => {
 
 const AboutSection = () => {
   const images = useMemo(() => aboutImages, []);
+  const slides = useMemo(
+    () =>
+      images.map((imageSrc, index) => ({
+        imageSrc,
+        title: aboutSlideContent[index % aboutSlideContent.length]?.title ?? 'Life at La REZ',
+        description:
+          aboutSlideContent[index % aboutSlideContent.length]?.description ??
+          'Experience the daily rhythm of our international community.'
+      })),
+    [images]
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
-  const hasImages = images.length > 0;
+  const hasImages = slides.length > 0;
 
   useEffect(() => {
-    if (!hasImages || images.length === 1) {
+    if (!hasImages || slides.length === 1) {
       return undefined;
     }
 
     const intervalId = window.setInterval(() => {
-      setCurrentIndex((index) => (index + 1) % images.length);
+      setCurrentIndex((index) => (index + 1) % slides.length);
     }, 5000);
 
     return () => {
       window.clearInterval(intervalId);
     };
-  }, [hasImages, images.length]);
+  }, [hasImages, slides.length]);
 
   const goToPrevious = () => {
     if (!hasImages) {
       return;
     }
 
-    setCurrentIndex((index) => (index - 1 + images.length) % images.length);
+    setCurrentIndex((index) => (index - 1 + slides.length) % slides.length);
   };
 
   const goToNext = () => {
@@ -189,8 +219,9 @@ const AboutSection = () => {
       return;
     }
 
-    setCurrentIndex((index) => (index + 1) % images.length);
+    setCurrentIndex((index) => (index + 1) % slides.length);
   };
+  const currentSlide = slides[currentIndex];
 
   return (
     <section className="py-20 bg-background-light dark:bg-background-dark" id="about">
@@ -217,10 +248,10 @@ const AboutSection = () => {
             {hasImages ? (
               <>
                 <img
-                  src={images[currentIndex]}
+                  src={currentSlide.imageSrc}
                   alt="Life at La REZ"
                   className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
-                  key={images[currentIndex]}
+                  key={currentSlide.imageSrc}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
                 <div className="absolute inset-0 flex flex-col justify-between p-6">
@@ -228,13 +259,11 @@ const AboutSection = () => {
                     <span className="px-3 py-1 rounded-full bg-white/15 text-white/90 text-xs uppercase tracking-wide self-start">
                       Life at La REZ
                     </span>
-                    <h3 className="text-white text-3xl font-semibold drop-shadow">Campus Moments</h3>
-                    <p className="text-white/85 text-sm leading-relaxed max-w-sm">
-                      Real glimpses from our shared kitchens, lounges, and community events.
-                    </p>
+                    <h3 className="text-white text-3xl font-semibold drop-shadow">{currentSlide.title}</h3>
+                    <p className="text-white/85 text-sm leading-relaxed max-w-sm">{currentSlide.description}</p>
                   </div>
                 </div>
-                {images.length > 1 && (
+                {slides.length > 1 && (
                   <>
                     <button
                       type="button"
@@ -253,7 +282,7 @@ const AboutSection = () => {
                       <span className="material-icons text-2xl">chevron_right</span>
                     </button>
                     <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
-                      {images.map((imageSrc, index) => (
+                      {slides.map(({ imageSrc }, index) => (
                         <button
                           key={imageSrc}
                           type="button"
