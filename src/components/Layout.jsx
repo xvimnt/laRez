@@ -41,6 +41,12 @@ const Layout = () => {
             >
               Contact
             </a>
+            <Link
+              to="/faq"
+              className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
+            >
+              FAQ
+            </Link>
           </nav>
           <div className="flex items-center">
             <a
