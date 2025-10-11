@@ -14,7 +14,6 @@ const roomOptions = [
     deposit: 'Security deposit: 470€',
     description:
       'Includes a single bed with linens, wardrobe/closet, and a table or desk — ideal for focused study and privacy.',
-    icon: 'single_bed',
     image: singleRoomImage,
     imageAlt: 'Cozy single room with a desk'
   },
@@ -25,7 +24,6 @@ const roomOptions = [
     deposit: 'Security deposit: 650€',
     description:
       'Perfect for couples or close friends. Features a double bed with linens, spacious wardrobe/closet, and a shared table or desk.',
-    icon: 'king_bed',
     image: doubleRoomImage,
     imageAlt: 'Comfortable double room'
   },
@@ -36,7 +34,6 @@ const roomOptions = [
     deposit: 'Security deposit: 450€',
     description:
       'A budget-friendly option with single beds, linens, wardrobe/closet space, and individual tables or desks. Rooms host two to three people.',
-    icon: 'groups',
     image: sharedRoomImage,
     imageAlt: 'Shared room for students'
   }
@@ -216,7 +213,7 @@ const AboutSection = () => {
               </p>
             </div>
           </div>
-          <div className="relative h-96 rounded-lg shadow-2xl overflow-hidden">
+          <div className="relative h-96 rounded-3xl shadow-2xl overflow-hidden">
             {hasImages ? (
               <>
                 <img
@@ -225,33 +222,44 @@ const AboutSection = () => {
                   className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ease-in-out"
                   key={images[currentIndex]}
                 />
-                <div className="absolute inset-0 bg-black/20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+                <div className="absolute inset-0 flex flex-col justify-between p-6">
+                  <div className="flex flex-col gap-3 text-left">
+                    <span className="px-3 py-1 rounded-full bg-white/15 text-white/90 text-xs uppercase tracking-wide self-start">
+                      Life at La REZ
+                    </span>
+                    <h3 className="text-white text-3xl font-semibold drop-shadow">Campus Moments</h3>
+                    <p className="text-white/85 text-sm leading-relaxed max-w-sm">
+                      Real glimpses from our shared kitchens, lounges, and community events.
+                    </p>
+                  </div>
+                </div>
                 {images.length > 1 && (
                   <>
                     <button
                       type="button"
                       onClick={goToPrevious}
-                      className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 text-primary rounded-full w-12 h-12 flex items-center justify-center shadow-lg shadow-black/30 hover:bg-white focus:outline-none focus:ring-2 focus:ring-white"
                       aria-label="Previous image"
                     >
-                      <span className="material-icons">chevron_left</span>
+                      <span className="material-icons text-2xl">chevron_left</span>
                     </button>
                     <button
                       type="button"
                       onClick={goToNext}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 text-white rounded-full p-2 hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 text-primary rounded-full w-12 h-12 flex items-center justify-center shadow-lg shadow-black/30 hover:bg-white focus:outline-none focus:ring-2 focus:ring-white"
                       aria-label="Next image"
                     >
-                      <span className="material-icons">chevron_right</span>
+                      <span className="material-icons text-2xl">chevron_right</span>
                     </button>
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                    <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
                       {images.map((imageSrc, index) => (
                         <button
                           key={imageSrc}
                           type="button"
                           onClick={() => setCurrentIndex(index)}
-                          className={`h-2 w-2 rounded-full ${
-                            index === currentIndex ? 'bg-white' : 'bg-white/40'
+                          className={`h-2.5 w-2.5 rounded-full ${
+                            index === currentIndex ? 'bg-white/90' : 'bg-white/45'
                           }`}
                           aria-label={`Show image ${index + 1}`}
                         />
@@ -284,24 +292,30 @@ const RoomsSection = () => {
           {roomOptions.map(({ key, title, price, deposit, description, icon, image, imageAlt }) => (
             <div
               key={key}
-              className="bg-background-light dark:bg-background-dark rounded-lg shadow-lg overflow-hidden group text-left aspect-square flex flex-col"
+              className="bg-background-light dark:bg-background-dark rounded-3xl shadow-2xl overflow-hidden aspect-square flex flex-col relative"
             >
-              <div className="relative h-1/2">
-                <img src={image} alt={imageAlt} className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-black/20" />
-              </div>
-              <div className="flex-1 p-6 pb-8 flex flex-col justify-between">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <span className="material-icons text-primary text-3xl">{icon}</span>
-                    <div>
-                      <h3 className="text-2xl font-semibold text-text-light dark:text-text-dark">{title}</h3>
-                      <p className="text-text-muted-light dark:text-text-muted-dark text-sm">{price}</p>
-                      <p className="text-text-muted-light dark:text-text-muted-dark text-sm">{deposit}</p>
+              <img src={image} alt={imageAlt} className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              <div className="relative z-10 h-full flex flex-col justify-between p-6">
+                <div className="space-y-4 text-left">
+                  <div>
+                    <h3 className="text-3xl font-semibold text-white">{title}</h3>
+                    <div className="mt-3 space-y-2">
+                      <div className="flex items-center gap-2 text-white/85 text-sm">
+                        <span className="material-icons text-white/80 text-base">payments</span>
+                        <span>{price}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-white/75 text-sm">
+                        <span className="material-icons text-white/75 text-base">savings</span>
+                        <span>{deposit}</span>
+                      </div>
                     </div>
                   </div>
-                  <p className="text-text-muted-light dark:text-text-muted-dark text-sm">{description}</p>
+                  <p className="text-white/80 text-sm leading-relaxed">{description}</p>
                 </div>
+                <button className="w-full bg-white/90 text-primary font-semibold py-2 rounded-full shadow-lg shadow-black/20 transition hover:bg-white">
+                  Book now
+                </button>
               </div>
             </div>
           ))}
