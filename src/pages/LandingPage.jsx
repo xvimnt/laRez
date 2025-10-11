@@ -6,6 +6,42 @@ import singleRoomImage from '../assets/images/single-room.jpg';
 import doubleRoomImage from '../assets/images/double-room.jpg';
 import sharedRoomImage from '../assets/images/shared-room.jpg';
 
+const roomOptions = [
+  {
+    key: 'single',
+    title: 'Single room',
+    price: '470€ per month per person',
+    deposit: 'Security deposit: 470€',
+    description:
+      'Includes a single bed with linens, wardrobe/closet, and a table or desk — ideal for focused study and privacy.',
+    icon: 'single_bed',
+    image: singleRoomImage,
+    imageAlt: 'Cozy single room with a desk'
+  },
+  {
+    key: 'double',
+    title: 'Double room',
+    price: '575€ per month for two people',
+    deposit: 'Security deposit: 650€',
+    description:
+      'Perfect for couples or close friends. Features a double bed with linens, spacious wardrobe/closet, and a shared table or desk.',
+    icon: 'king_bed',
+    image: doubleRoomImage,
+    imageAlt: 'Comfortable double room'
+  },
+  {
+    key: 'shared',
+    title: 'Shared room',
+    price: '350€ per month per person',
+    deposit: 'Security deposit: 450€',
+    description:
+      'A budget-friendly option with single beds, linens, wardrobe/closet space, and individual tables or desks. Rooms host two to three people.',
+    icon: 'groups',
+    image: sharedRoomImage,
+    imageAlt: 'Shared room for students'
+  }
+];
+
 const aboutImageModules = import.meta.glob('../assets/images/photo*.jpg', { eager: true });
 const aboutImages = Object.entries(aboutImageModules)
   .sort(([a], [b]) => a.localeCompare(b))
@@ -244,55 +280,31 @@ const RoomsSection = () => {
         <p className="text-text-muted-light dark:text-text-muted-dark mb-12 max-w-2xl mx-auto">
           We offer a variety of rooms to suit your needs and budget. All rooms are fully furnished and ready for you to move in.
         </p>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-background-light dark:bg-background-dark rounded-lg shadow-lg overflow-hidden group text-left">
-            <div className="relative h-64">
-              <img src={singleRoomImage} alt="Cozy single room with a desk" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-black bg-opacity-20" />
-            </div>
-            <div className="p-6 space-y-3">
-              <div>
-                <h3 className="text-2xl font-semibold text-text-light dark:text-text-dark">Single room</h3>
-                <p className="text-text-muted-light dark:text-text-muted-dark text-sm">470€ per month per person</p>
-                <p className="text-text-muted-light dark:text-text-muted-dark text-sm">Security deposit: 470€</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {roomOptions.map(({ key, title, price, deposit, description, icon, image, imageAlt }) => (
+            <div
+              key={key}
+              className="bg-background-light dark:bg-background-dark rounded-lg shadow-lg overflow-hidden group text-left aspect-square flex flex-col"
+            >
+              <div className="relative h-1/2">
+                <img src={image} alt={imageAlt} className="absolute inset-0 w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/20" />
               </div>
-              <p className="text-text-muted-light dark:text-text-muted-dark">
-                Includes a single bed with linens, wardrobe/closet, and a table or desk — ideal for focused study and privacy.
-              </p>
-            </div>
-          </div>
-          <div className="bg-background-light dark:bg-background-dark rounded-lg shadow-lg overflow-hidden group text-left">
-            <div className="relative h-64">
-              <img src={doubleRoomImage} alt="Comfortable double room" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-black bg-opacity-20" />
-            </div>
-            <div className="p-6 space-y-3">
-              <div>
-                <h3 className="text-2xl font-semibold text-text-light dark:text-text-dark">Double room</h3>
-                <p className="text-text-muted-light dark:text-text-muted-dark text-sm">575€ per month for two people</p>
-                <p className="text-text-muted-light dark:text-text-muted-dark text-sm">Security deposit: 650€</p>
+              <div className="flex-1 p-6 pb-8 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="material-icons text-primary text-3xl">{icon}</span>
+                    <div>
+                      <h3 className="text-2xl font-semibold text-text-light dark:text-text-dark">{title}</h3>
+                      <p className="text-text-muted-light dark:text-text-muted-dark text-sm">{price}</p>
+                      <p className="text-text-muted-light dark:text-text-muted-dark text-sm">{deposit}</p>
+                    </div>
+                  </div>
+                  <p className="text-text-muted-light dark:text-text-muted-dark text-sm">{description}</p>
+                </div>
               </div>
-              <p className="text-text-muted-light dark:text-text-muted-dark">
-                Perfect for couples or close friends. Features a double bed with linens, spacious wardrobe/closet, and a shared table or desk.
-              </p>
             </div>
-          </div>
-          <div className="bg-background-light dark:bg-background-dark rounded-lg shadow-lg overflow-hidden group text-left">
-            <div className="relative h-64">
-              <img src={sharedRoomImage} alt="Shared room for students" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-black bg-opacity-20" />
-            </div>
-            <div className="p-6 space-y-3">
-              <div>
-                <h3 className="text-2xl font-semibold text-text-light dark:text-text-dark">Shared room</h3>
-                <p className="text-text-muted-light dark:text-text-muted-dark text-sm">350€ per month per person</p>
-                <p className="text-text-muted-light dark:text-text-muted-dark text-sm">Security deposit: 450€</p>
-              </div>
-              <p className="text-text-muted-light dark:text-text-muted-dark">
-                A budget-friendly option with single beds, linens, wardrobe/closet space, and individual tables or desks. Rooms host two to three people.
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
