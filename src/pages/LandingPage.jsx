@@ -5,67 +5,76 @@ import bannerLayerThree from '../assets/images/banner-parallax-3.png';
 import singleRoomImage from '../assets/images/single-room.jpg';
 import doubleRoomImage from '../assets/images/double-room.jpg';
 import sharedRoomImage from '../assets/images/shared-room.jpg';
+import blueprintImageOne from '../assets/images/blueprint-1.gif';
+import blueprintImageTwo from '../assets/images/blueprint-2.gif';
+import blueprintImageThree from '../assets/images/blueprint-3.gif';
+import blueprintImageFour from '../assets/images/blueprint-4.gif';
+import neighborhoodImageOne from '../assets/images/neighborhood-1.jpg';
+import neighborhoodImageTwo from '../assets/images/neighborhood-2.jpg';
+import neighborhoodImageThree from '../assets/images/neighborhood-3.jpg';
+import neighborhoodImageFour from '../assets/images/neighborhood-4.jpg';
+import neighborhoodImageFive from '../assets/images/neighborhood-5.jpg';
 
 const aboutSlideMetadata = {
   'photo1.jpg': {
-    title: 'Full equiped rooms',
-    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+    title: 'Commons for Connection',
+    description: 'Two big rooms invite everyone to socialise with couches, board games, free wi-fi and cable TV.'
   },
   'photo2.jpg': {
-    title: 'Full equiped rooms',
-    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
-  },
-  'photo3.jpg': {
-    title: 'Shared Moments',
-    description: 'Catch up with residents in the lounge or swap stories over dinner in our communal kitchen.'
+    title: 'Entertainment Ready Rooms',
+    description: 'Settle into our shared rooms stocked with comfy seating, streaming cable and always-on internet.'
   },
   'photo4.jpg': {
-    title: 'Full equiped rooms',
-    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+    title: 'Desks & Library Amenities',
+    description: 'The main common room houses study desks and a take-a-book library for quiet focus.'
+  },
+  'photo3.jpg': {
+    title: 'Relax & Recharge Room',
+    description: 'Residents lounge here throughout the day, surfing the Net, watching the news and recharging.'
   },
   'photo5.jpg': {
-    title: 'Cultural Exchange',
-    description: 'Meet people from around the world and experience new traditions without leaving home.'
+    title: 'Erasmus House Lounge',
+    description: 'Lively conversations, chess duels and snack-filled get-togethers thrive in our Erasmus house.'
   },
   'photo6.jpg': {
-    title: 'Explore Paris',
-    description: 'Use La REZ as your base to discover the city—great connections put Paris at your doorstep.'
+    title: 'Garden Pause Before Paris',
+    description: 'Recharge on rustic garden seating and lawn chairs before heading out for city adventures.'
   },
   'photo7.jpg': {
-    title: 'Feel at home',
-    description: 'Make La REZ your home away from home and feel comfortable in your cozy French apartment.'
-  },
-  'photo8.jpg': {
-    title: 'Shared Moments',
-    description: 'Catch up with residents in the lounge or swap stories over dinner in our communal kitchen.'
-  },
-  'photo9.jpg': {
-    title: 'We have it all',
-    description: 'Shower rooms, toilet facilities, washer, dryer, stoves, ovens, etc. Perfect for long stays.'
-  },
-  'photo10.jpg': {
-    title: 'Explore Paris',
-    description: 'Use La REZ as your base to discover the city—great connections put Paris at your doorstep.'
-  },
-  'photo11.jpg':  {
-    title: 'We have it all',
-    description: 'Shower rooms, toilet facilities, washer, dryer, stoves, ovens, etc. Perfect for long stays.'
-  },
-  'photo12.jpg': {
-    title: 'Full equiped rooms',
-    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
-  },
-  'photo13.jpg': {
-    title: 'Full equiped rooms',
-    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+    title: 'Backyard Gathering Spot',
+    description: 'Our backyard becomes the favourite hang-out, perfect for outdoor meals and easy mingling.'
   },
   'photo14.jpg': {
-    title: 'Full equiped rooms',
-    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+    title: 'Outdoor Dining Amenities',
+    description: 'Rustic tables and seating make al fresco dinners and impromptu BBQ evenings effortless.'
   },
   'photo15.jpg': {
-    title: 'Full equiped rooms',
-    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+    title: 'Double Kitchen Facilities',
+    description: 'Two shared kitchens bring everyone together with plenty of prep space morning, noon and night.'
+  },
+  'photo10.jpg': {
+    title: 'Fuel for City Days',
+    description: 'Stocked refrigerators, cupboards and cooking supplies make it easy to prep meals for Paris outings.'
+  },
+  'photo11.jpg':  {
+    title: 'On-Site Laundry Facilities',
+    description: 'Our coin-operated washer and dryer keep fresh clothes within easy reach of every resident.'
+  },
+  'photo12.jpg': {
+    title: 'Shared Storage Rooms',
+    description: 'Every resident gets fridge and cupboard space, so ingredients stay organised and accessible.'
+  },
+  'photo13.jpg': {
+    title: 'Cookware-Ready Room',
+    description: 'Common kitchens come with shared cookware, letting you settle in without extra baggage.'
+  },
+  'photo8.jpg': {
+    title: 'Erasmus Kitchen Room',
+    description: 'Students in the Erasmus building enjoy a fully-equipped kitchen complete with tableware and cutlery.'
+  },
+  'photo9.jpg': {
+    title: 'Shower Rooms on Standby',
+    description: 'Ample shower rooms and toilet facilities are available across both buildings for convenience.'
   },
 };
 
@@ -111,6 +120,21 @@ const aboutImageModules = import.meta.glob('../assets/images/photo*.jpg', { eage
 const aboutImages = Object.entries(aboutImageModules)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([, module]) => module.default);
+
+const blueprintImages = [
+  blueprintImageOne,
+  blueprintImageTwo,
+  blueprintImageThree,
+  blueprintImageFour
+];
+
+const neighborhoodImages = [
+  neighborhoodImageOne,
+  neighborhoodImageTwo,
+  neighborhoodImageThree,
+  neighborhoodImageFour,
+  neighborhoodImageFive
+];
 
 const LandingHero = () => {
   const [scrollOffset, setScrollOffset] = useState(0);
@@ -441,6 +465,88 @@ const AboutSection = () => {
   );
 };
 
+const DetailPreviewSection = () => {
+  const [activeModal, setActiveModal] = useState(null);
+
+  const modalContent = (() => {
+    if (activeModal === 'plans') {
+      return {
+        title: 'Floor Plans',
+        description: 'Preview the layouts for our rooms and shared spaces.',
+        images: blueprintImages,
+        altPrefix: 'Floor plan'
+      };
+    }
+    if (activeModal === 'neighborhood') {
+      return {
+        title: 'Our Neighborhood',
+        description: 'Discover the surrounding area and nearby amenities.',
+        images: neighborhoodImages,
+        altPrefix: 'Neighborhood photo'
+      };
+    }
+    return null;
+  })();
+
+  return (
+    <section className="py-14 bg-card-light dark:bg-card-dark" id="details">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto text-center space-y-3">
+          <h2 className="text-4xl font-bold text-text-light dark:text-text-dark">See More of La REZ</h2>
+          <p className="text-text-muted-light dark:text-text-muted-dark">
+            Hover to explore detailed floor plans or get a glimpse of the neighborhood surrounding the residence.
+          </p>
+        </div>
+        <div className="relative mt-8 flex flex-col items-center" onMouseLeave={() => setActiveModal(null)}>
+          <div className="flex flex-wrap justify-center gap-6">
+            <button
+              type="button"
+              onMouseEnter={() => setActiveModal('plans')}
+              className="px-8 py-4 rounded-full bg-primary text-white font-semibold text-lg shadow-lg shadow-black/20 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary/40"
+            >
+              Show floor plans
+            </button>
+            <button
+              type="button"
+              onMouseEnter={() => setActiveModal('neighborhood')}
+              className="px-8 py-4 rounded-full bg-primary text-white font-semibold text-lg shadow-lg shadow-black/20 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary/40"
+            >
+              Show neighborhood
+            </button>
+          </div>
+          <div
+            className={`absolute bottom-full mb-8 left-1/2 -translate-x-1/2 w-full max-w-5xl transition-all duration-300 ease-out ${
+              modalContent ? 'z-30 opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'
+            }`}
+          >
+            {modalContent && (
+              <div className="rounded-3xl p-8 shadow-2xl bg-background-light dark:bg-background-dark">
+                <h3 className="text-2xl font-semibold text-text-light dark:text-text-dark text-center">
+                  {modalContent.title}
+                </h3>
+                <p className="mt-2 text-center text-text-muted-light dark:text-text-muted-dark">
+                  {modalContent.description}
+                </p>
+                <div className="mt-6 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                  {modalContent.images.map((imageSrc, index) => (
+                    <div key={imageSrc} className="w-full overflow-hidden rounded-2xl">
+                      <img
+                        src={imageSrc}
+                        alt={`${modalContent.altPrefix} ${index + 1}`}
+                        className="h-48 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const RoomsSection = () => {
   return (
     <section className="py-20 bg-card-light dark:bg-card-dark" id="rooms">
@@ -575,6 +681,7 @@ const LandingPage = () => {
       <AboutSection />
       <RoomsSection />
       <AmenitiesSection />
+      <DetailPreviewSection />
       <CallToActionSection />
     </div>
   );
