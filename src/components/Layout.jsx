@@ -50,7 +50,7 @@ const Layout = () => {
           </nav>
           <div className="flex items-center">
             <a
-              href="#contact"
+              href="https://docs.google.com/forms/d/e/1FAIpQLSd2ku593gaxVr6Pb4CBj4AHxBlj5hAyRD2NkUw4QOEohQ4x0w/viewform"
               className="bg-primary text-white px-6 py-2 rounded-full font-semibold hover:bg-red-700 transition-colors"
             >
               Book Now

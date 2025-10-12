@@ -6,24 +6,73 @@ import singleRoomImage from '../assets/images/single-room.jpg';
 import doubleRoomImage from '../assets/images/double-room.jpg';
 import sharedRoomImage from '../assets/images/shared-room.jpg';
 
-const aboutSlideContent = [
-  {
+const aboutSlideMetadata = {
+  'photo1.jpg': {
+    title: 'Full equiped rooms',
+    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+  },
+  'photo2.jpg': {
+    title: 'Full equiped rooms',
+    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+  },
+  'photo3.jpg': {
     title: 'Shared Moments',
     description: 'Catch up with residents in the lounge or swap stories over dinner in our communal kitchen.'
   },
-  {
-    title: 'Study Together',
-    description: 'Collaborate on projects or prepare for exams in our bright, cozy study corners.'
+  'photo4.jpg': {
+    title: 'Full equiped rooms',
+    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
   },
-  {
+  'photo5.jpg': {
+    title: 'Cultural Exchange',
+    description: 'Meet people from around the world and experience new traditions without leaving home.'
+  },
+  'photo6.jpg': {
     title: 'Explore Paris',
     description: 'Use La REZ as your base to discover the city—great connections put Paris at your doorstep.'
   },
-  {
-    title: 'Cultural Exchange',
-    description: 'Meet people from around the world and experience new traditions without leaving home.'
-  }
-];
+  'photo7.jpg': {
+    title: 'Feel at home',
+    description: 'Make La REZ your home away from home and feel comfortable in your cozy French apartment.'
+  },
+  'photo8.jpg': {
+    title: 'Shared Moments',
+    description: 'Catch up with residents in the lounge or swap stories over dinner in our communal kitchen.'
+  },
+  'photo9.jpg': {
+    title: 'We have it all',
+    description: 'Shower rooms, toilet facilities, washer, dryer, stoves, ovens, etc. Perfect for long stays.'
+  },
+  'photo10.jpg': {
+    title: 'Explore Paris',
+    description: 'Use La REZ as your base to discover the city—great connections put Paris at your doorstep.'
+  },
+  'photo11.jpg':  {
+    title: 'We have it all',
+    description: 'Shower rooms, toilet facilities, washer, dryer, stoves, ovens, etc. Perfect for long stays.'
+  },
+  'photo12.jpg': {
+    title: 'Full equiped rooms',
+    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+  },
+  'photo13.jpg': {
+    title: 'Full equiped rooms',
+    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+  },
+  'photo14.jpg': {
+    title: 'Full equiped rooms',
+    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+  },
+  'photo15.jpg': {
+    title: 'Full equiped rooms',
+    description: 'All rooms are fully equiped with a bed, a desk, a wardrobe and a table.'
+  },
+};
+
+const defaultSlideMetadata = {
+  title: 'Life at La REZ',
+  description: 'Experience the daily rhythm of our international community.'
+};
 
 const roomOptions = [
   {
@@ -180,13 +229,22 @@ const AboutSection = () => {
   const images = useMemo(() => aboutImages, []);
   const slides = useMemo(
     () =>
-      images.map((imageSrc, index) => ({
-        imageSrc,
-        title: aboutSlideContent[index % aboutSlideContent.length]?.title ?? 'Life at La REZ',
-        description:
-          aboutSlideContent[index % aboutSlideContent.length]?.description ??
-          'Experience the daily rhythm of our international community.'
-      })),
+      images.map((imageSrc) => {
+        const fileName = imageSrc.split('/').pop() ?? '';
+        const normalizedKey = (() => {
+          const match = fileName.match(/(photo\d+)/i);
+          if (match) {
+            return `${match[1].toLowerCase()}.jpg`;
+          }
+          return fileName;
+        })();
+        const metadata = aboutSlideMetadata[normalizedKey] ?? defaultSlideMetadata;
+        return {
+          imageSrc,
+          title: metadata.title,
+          description: metadata.description
+        };
+      }),
     [images]
   );
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -416,9 +474,12 @@ const RoomsSection = () => {
                   </div>
                   <p className="text-white/80 text-sm leading-relaxed">{description}</p>
                 </div>
-                <button className="w-full bg-white/90 text-primary font-semibold py-2 rounded-full shadow-lg shadow-black/20 transition hover:bg-white">
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSd2ku593gaxVr6Pb4CBj4AHxBlj5hAyRD2NkUw4QOEohQ4x0w/viewform"
+                  className="w-full bg-white/90 text-primary font-semibold py-2 rounded-full shadow-lg shadow-black/20 transition hover:bg-white"
+                >
                   Book now
-                </button>
+                </a>
               </div>
             </div>
           ))}
@@ -497,7 +558,7 @@ const CallToActionSection = () => {
           Don't miss the opportunity to live in one of the most vibrant student communities in Paris. Apply now!
         </p>
         <a
-          href="#contact"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSd2ku593gaxVr6Pb4CBj4AHxBlj5hAyRD2NkUw4QOEohQ4x0w/viewform"
           className="bg-white text-primary px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition-transform transform hover:scale-105"
         >
           Book Your Room Today
