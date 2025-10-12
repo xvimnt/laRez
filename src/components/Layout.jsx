@@ -7,12 +7,12 @@ const Layout = () => {
     <div className="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark min-h-screen">
       <header className="fixed top-0 left-0 right-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm shadow-md">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center">
+          <Link to="/" className="flex items-center">
             <img src={logoImage} alt="La REZ Logo" className="h-16 w-auto" />
-          </div>
+          </Link>
           <nav className="hidden md:flex items-center space-x-6">
             <Link
-              to="/"
+              to="#hero"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               Home
@@ -34,6 +34,12 @@ const Layout = () => {
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               Amenities
+            </a>
+            <a
+              href="#details"
+              className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
+            >
+              Details
             </a>
             <a
               href="#contact"

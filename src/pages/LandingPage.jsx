@@ -467,6 +467,8 @@ const AboutSection = () => {
 
 const DetailPreviewSection = () => {
   const [activeModal, setActiveModal] = useState(null);
+  const [modalPlacement, setModalPlacement] = useState('above');
+  const buttonsContainerRef = useRef(null);
 
   const modalContent = (() => {
     if (activeModal === 'plans') {
@@ -488,6 +490,20 @@ const DetailPreviewSection = () => {
     return null;
   })();
 
+  const handleMouseEnter = (type) => {
+    setActiveModal(type);
+    if (typeof window === 'undefined') {
+      return;
+    }
+    const rect = buttonsContainerRef.current?.getBoundingClientRect?.();
+    if (!rect) {
+      return;
+    }
+    const spaceAbove = rect.top;
+    const spaceBelow = window.innerHeight - rect.bottom;
+    setModalPlacement(spaceAbove > spaceBelow ? 'above' : 'below');
+  };
+
   return (
     <section className="py-14 bg-card-light dark:bg-card-dark" id="details">
       <div className="container mx-auto px-6">
@@ -498,25 +514,31 @@ const DetailPreviewSection = () => {
           </p>
         </div>
         <div className="relative mt-8 flex flex-col items-center" onMouseLeave={() => setActiveModal(null)}>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div ref={buttonsContainerRef} className="flex flex-wrap justify-center gap-6">
             <button
               type="button"
-              onMouseEnter={() => setActiveModal('plans')}
+              onMouseEnter={() => handleMouseEnter('plans')}
               className="px-8 py-4 rounded-full bg-primary text-white font-semibold text-lg shadow-lg shadow-black/20 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary/40"
             >
               Show floor plans
             </button>
             <button
               type="button"
-              onMouseEnter={() => setActiveModal('neighborhood')}
+              onMouseEnter={() => handleMouseEnter('neighborhood')}
               className="px-8 py-4 rounded-full bg-primary text-white font-semibold text-lg shadow-lg shadow-black/20 transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary/40"
             >
               Show neighborhood
             </button>
           </div>
           <div
-            className={`absolute bottom-full mb-8 left-1/2 -translate-x-1/2 w-full max-w-5xl transition-all duration-300 ease-out ${
-              modalContent ? 'z-30 opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-2 pointer-events-none'
+            className={`absolute left-1/2 -translate-x-1/2 w-full max-w-5xl transition-all duration-300 ease-out ${
+              modalPlacement === 'above' ? 'bottom-full mb-8' : 'top-full mt-8'
+            } ${
+              modalContent
+                ? 'z-30 opacity-100 translate-y-0 pointer-events-auto'
+                : modalPlacement === 'above'
+                  ? 'opacity-0 translate-y-2 pointer-events-none'
+                  : 'opacity-0 -translate-y-2 pointer-events-none'
             }`}
           >
             {modalContent && (
