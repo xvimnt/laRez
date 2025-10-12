@@ -490,6 +490,8 @@ const DetailPreviewSection = () => {
     return null;
   })();
 
+  const isFloorPlanModal = modalContent?.altPrefix === 'Floor plan';
+
   const handleMouseEnter = (type) => {
     setActiveModal(type);
     if (typeof window === 'undefined') {
@@ -551,11 +553,18 @@ const DetailPreviewSection = () => {
                 </p>
                 <div className="mt-6 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                   {modalContent.images.map((imageSrc, index) => (
-                    <div key={imageSrc} className="w-full overflow-hidden rounded-2xl">
+                    <div
+                      key={imageSrc}
+                      className={`w-full overflow-hidden rounded-2xl ${
+                        isFloorPlanModal ? 'aspect-square flex items-center justify-center bg-white dark:bg-neutral-900' : ''
+                      }`}
+                    >
                       <img
                         src={imageSrc}
                         alt={`${modalContent.altPrefix} ${index + 1}`}
-                        className="h-48 w-full object-cover"
+                        className={
+                          isFloorPlanModal ? 'h-full w-full object-contain' : 'h-48 w-full object-cover'
+                        }
                       />
                     </div>
                   ))}
