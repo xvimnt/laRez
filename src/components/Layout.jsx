@@ -11,12 +11,12 @@ const Layout = () => {
             <img src={logoImage} alt="La REZ Logo" className="h-16 w-auto" />
           </Link>
           <nav className="hidden md:flex items-center space-x-6">
-            <Link
-              to="#hero"
+            <a
+              href="#hero"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               Home
-            </Link>
+            </a>
             <a
               href="#about"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"

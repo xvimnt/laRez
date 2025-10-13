@@ -533,7 +533,9 @@ const DetailPreviewSection = () => {
             </button>
           </div>
           <div
-            className={`absolute left-1/2 -translate-x-1/2 w-full max-w-5xl transition-all duration-300 ease-out ${
+            className={`absolute left-1/2 -translate-x-1/2 w-full ${
+              isFloorPlanModal ? 'max-w-8xl' : 'max-w-5xl'
+            } transition-all duration-300 ease-out ${
               modalPlacement === 'above' ? 'bottom-full mb-8' : 'top-full mt-8'
             } ${
               modalContent
@@ -551,7 +553,11 @@ const DetailPreviewSection = () => {
                 <p className="mt-2 text-center text-text-muted-light dark:text-text-muted-dark">
                   {modalContent.description}
                 </p>
-                <div className="mt-6 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                <div
+                  className={`mt-6 grid gap-4 ${
+                    isFloorPlanModal ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
+                  }`}
+                >
                   {modalContent.images.map((imageSrc, index) => (
                     <div
                       key={imageSrc}
