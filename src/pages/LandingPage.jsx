@@ -532,14 +532,14 @@ const DetailPreviewSection = () => {
   };
 
   return (
-    <section className="py-14 bg-card-light dark:bg-card-dark relative overflow-hidden" id="details">
+    <section className="py-14 bg-card-light dark:bg-card-dark relative" id="details">
       {/* Decorative emoji */}
       <img 
         src={emoji1} 
         alt="Decorative emoji" 
-        className="absolute right-24 top-1/2 -translate-y-1/2 w-40 h-auto opacity-90 dark:opacity-25 pointer-events-none z-0"
+        className="absolute right-24 top-1/2 -translate-y-1/2 w-40 h-auto opacity-90 dark:opacity-25 pointer-events-none z-[5]"
       />
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-6 relative">
         <div className="max-w-3xl mx-auto text-center space-y-3">
           <h2 className="text-4xl font-bold text-text-light dark:text-text-dark">See More of La REZ</h2>
           <p className="text-text-muted-light dark:text-text-muted-dark">
@@ -570,7 +570,7 @@ const DetailPreviewSection = () => {
               modalPlacement === 'above' ? 'bottom-full mb-8' : 'top-full mt-8'
             } ${
               modalContent
-                ? 'z-30 opacity-100 translate-y-0 pointer-events-auto'
+                ? 'z-[60] opacity-100 translate-y-0 pointer-events-auto'
                 : modalPlacement === 'above'
                   ? 'opacity-0 translate-y-2 pointer-events-none'
                   : 'opacity-0 -translate-y-2 pointer-events-none'
