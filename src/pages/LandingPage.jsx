@@ -14,6 +14,13 @@ import neighborhoodImageTwo from '../assets/images/neighborhood-2.jpg';
 import neighborhoodImageThree from '../assets/images/neighborhood-3.jpg';
 import neighborhoodImageFour from '../assets/images/neighborhood-4.jpg';
 import neighborhoodImageFive from '../assets/images/neighborhood-5.jpg';
+import plant1 from '../assets/images/plant1.png';
+import plant2 from '../assets/images/plant2.png';
+import cloud1 from '../assets/svgs/cloud1.svg';
+import cloud2 from '../assets/svgs/cloud2.svg';
+import cloud3 from '../assets/svgs/cloud3.svg';
+import arrow1 from '../assets/svgs/arrow1.svg';
+import emoji1 from '../assets/svgs/emoji1.svg';
 
 const aboutSlideMetadata = {
   'photo1.jpg': {
@@ -365,8 +372,26 @@ const AboutSection = () => {
   const currentSlide = slides[currentIndex];
 
   return (
-    <section className="py-20 bg-background-light dark:bg-background-dark" id="about">
-      <div className="container mx-auto px-6">
+    <section className="py-20 bg-background-light dark:bg-background-dark relative overflow-hidden" id="about">
+      {/* Decorative cloud */}
+      <img 
+        src={cloud1} 
+        alt="Decorative cloud" 
+        className="absolute left-0 top-0 w-48 h-auto opacity-40 dark:opacity-25 pointer-events-none z-0"
+      />
+      {/* Decorative line */}
+      <img 
+        src={cloud2} 
+        alt="Decorative line" 
+        className="absolute left-1/2 -translate-x-1/2 top-0 w-64 h-auto opacity-30 dark:opacity-20 pointer-events-none z-0"
+      />
+      {/* Decorative cloud right */}
+      <img 
+        src={cloud3} 
+        alt="Decorative cloud" 
+        className="absolute right-0 top-0 w-48 h-auto opacity-40 dark:opacity-25 pointer-events-none z-0"
+      />
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl font-bold mb-4 text-text-light dark:text-text-dark">
@@ -507,8 +532,14 @@ const DetailPreviewSection = () => {
   };
 
   return (
-    <section className="py-14 bg-card-light dark:bg-card-dark" id="details">
-      <div className="container mx-auto px-6">
+    <section className="py-14 bg-card-light dark:bg-card-dark relative overflow-hidden" id="details">
+      {/* Decorative emoji */}
+      <img 
+        src={emoji1} 
+        alt="Decorative emoji" 
+        className="absolute right-24 top-1/2 -translate-y-1/2 w-40 h-auto opacity-90 dark:opacity-25 pointer-events-none z-0"
+      />
+      <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl mx-auto text-center space-y-3">
           <h2 className="text-4xl font-bold text-text-light dark:text-text-dark">See More of La REZ</h2>
           <p className="text-text-muted-light dark:text-text-muted-dark">
@@ -586,8 +617,19 @@ const DetailPreviewSection = () => {
 
 const RoomsSection = () => {
   return (
-    <section className="py-20 bg-card-light dark:bg-card-dark" id="rooms">
-      <div className="container mx-auto px-6 text-center">
+    <section className="py-20 bg-card-light dark:bg-card-dark relative overflow-hidden" id="rooms">
+      {/* Decorative plant images */}
+      <img 
+        src={plant1} 
+        alt="Decorative plant" 
+        className="absolute -rotate-45 left-0 top-1/2 -translate-y-1/2 w-64 h-auto opacity-70 dark:opacity-20 pointer-events-none z-0"
+      />
+      <img 
+        src={plant2} 
+        alt="Decorative plant" 
+        className="absolute rotate-45 right-0 top-1/2 -translate-y-1/2 w-64 h-auto opacity-70 dark:opacity-20 pointer-events-none z-0"
+      />
+      <div className="container mx-auto px-6 text-center relative z-10">
         <h2 className="text-4xl font-bold mb-2 text-text-light dark:text-text-dark">Find Your Perfect Space</h2>
         <p className="text-text-muted-light dark:text-text-muted-dark mb-12 max-w-2xl mx-auto">
           We offer a variety of rooms to suit your needs and budget. All rooms are fully furnished and ready for you to move in.
@@ -634,8 +676,14 @@ const RoomsSection = () => {
 
 const AmenitiesSection = () => {
   return (
-    <section className="py-20 bg-background-light dark:bg-background-dark" id="amenities">
-      <div className="container mx-auto px-6">
+    <section className="py-20 bg-background-light dark:bg-background-dark relative overflow-hidden" id="amenities">
+      {/* Decorative arrow */}
+      <img 
+        src={arrow1} 
+        alt="Decorative arrow" 
+        className="absolute left-52 -top-28 w-[26rem] h-auto opacity-40 dark:opacity-25 pointer-events-none z-0"
+      />
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-2 text-text-light dark:text-text-dark">Everything You Need</h2>
           <p className="text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto">
