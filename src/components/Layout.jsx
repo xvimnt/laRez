@@ -11,42 +11,42 @@ const Layout = () => {
             <img src={logoImage} alt="La REZ Logo" className="h-16 w-auto" />
           </Link>
           <nav className="hidden md:flex items-center space-x-6">
-            <a
-              href="#hero"
+            <Link
+              to="/#hero"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               Home
-            </a>
-            <a
-              href="#about"
+            </Link>
+            <Link
+              to="/#about"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               About
-            </a>
-            <a
-              href="#rooms"
+            </Link>
+            <Link
+              to="/#rooms"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               Rooms
-            </a>
-            <a
-              href="#amenities"
+            </Link>
+            <Link
+              to="/#amenities"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               Amenities
-            </a>
-            <a
-              href="#details"
+            </Link>
+            <Link
+              to="/#details"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               Details
-            </a>
-            <a
-              href="#contact"
+            </Link>
+            <Link
+              to="/#contact"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
             >
               Contact
-            </a>
+            </Link>
             <Link
               to="/faq"
               className="text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"

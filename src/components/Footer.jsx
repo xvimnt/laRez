@@ -17,17 +17,17 @@ const Footer = () => {
             <h3 className="text-xl font-bold text-white mb-4">Links</h3>
             <ul className="space-y-2">
               <li>
-                <a className="text-text-muted-dark hover:text-white" href="#about">
+                <a className="text-text-muted-dark hover:text-white" href="/#about">
                   About Us
                 </a>
               </li>
               <li>
-                <a className="text-text-muted-dark hover:text-white" href="#rooms">
+                <a className="text-text-muted-dark hover:text-white" href="/faq">
                   FAQ
                 </a>
               </li>
               <li>
-                <a className="text-text-muted-dark hover:text-white" href="#contact">
+                <a className="text-text-muted-dark hover:text-white" href="/#contact">
                   Contact
                 </a>
               </li>

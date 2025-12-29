@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import bannerLayerOne from '../assets/images/banner-parallax-1.png';
 import bannerLayerTwo from '../assets/images/banner-parallax-2.png';
 import bannerLayerThree from '../assets/images/banner-parallax-3.png';
@@ -760,6 +761,21 @@ const CallToActionSection = () => {
 };
 
 const LandingPage = () => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) {
+      return;
+    }
+
+    const targetId = hash.startsWith('#') ? hash.slice(1) : hash;
+
+    window.requestAnimationFrame(() => {
+      const element = document.getElementById(targetId);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    });
+  }, [hash]);
+
   return (
     <div>
       <LandingHero />
