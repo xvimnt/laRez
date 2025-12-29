@@ -6,11 +6,13 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold text-white mb-4">La REZ</h3>
             <p className="text-text-muted-dark">
-              11 Grande Rue
+              39 Grande Rue
               <br />
               91600 Savigny-sur-Orge
               <br />
-              France
+              <a className="hover:text-white" href="mailto:rooms.paris@gmail.com">
+                rooms.paris@gmail.com
+              </a>
             </p>
           </div>
           <div>
